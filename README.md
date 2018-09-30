@@ -2,6 +2,17 @@
 
 This tiny Elixir drop let's you reach in and unpack any value from a nested map. Returns nil for bad keys, unloaded associations, or empty maps.
 
+# Examples
+```elixir
+struct = %{player: %{game: %{id: "game-id"}}}
+Unpack.get_in(struct, [:player, :game, :id])
+=> "game-id"
+
+struct = %{player: %Ecto.Association.NotLoaded{}}
+Unpack.get_in(struct, [:player, :game, :id])
+=> nil
+```
+
 # Dependencies
 
 This library doesn't have many dependencies. However, to avoid depending on Ecto while still catching `%Ecto.Assocation.NotLoaded{}` values, I have stubbed the module. Be sure to place your `:ecto` dependency in your mix.exs file's `deps` function where it won't get overwritten :)
@@ -18,5 +29,4 @@ def deps do
 end
 ```
 
-Once published, the docs can
-be found at [https://hexdocs.pm/unpack](https://hexdocs.pm/unpack).
+Once published, the docs can be found at [https://hexdocs.pm/unpack](https://hexdocs.pm/unpack).
