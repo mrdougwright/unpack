@@ -11,6 +11,9 @@ defmodule Unpack.MixProject do
 
       # Docs
       name: "Unpack",
+      description: "Reach in and unpack any value from a nested map.",
+      licenses: ["MIT"],
+       links: %{"GitHub" => "https://github.com/mrdougwright/unpack"},
       source_url: "https://github.com/mrdougwright/unpack",
       docs: [
         main: "unpack",
