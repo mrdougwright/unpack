@@ -9,15 +9,14 @@ defmodule Unpack do
 
   ## Examples
       iex> struct = %{player: %{game: %{id: "game-id"}}}
-      iex> Unpack.unpack(struct, [:player, :game, :id])
+      iex> Unpack.get_in(struct, [:player, :game, :id])
       "game-id"
 
       iex> struct = %{player: %Ecto.Association.NotLoaded{}}
-      iex> Unpack.unpack(struct, [:player, :game, :id])
+      iex> Unpack.get_in(struct, [:player, :game, :id])
       nil
   """
-  @spec unpack(map(), [atom()]) :: nil | any()
-  def unpack(struct, keys) do
+  def get_in(struct, keys) do
     keys
     |> Enum.reduce(struct, &extract_value(&1, &2))
     |> handle_result()
