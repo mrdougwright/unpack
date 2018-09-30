@@ -17,25 +17,17 @@ defmodule Unpack do
       nil
   """
   def get_in(struct, keys) do
-    keys
-    |> Enum.reduce(struct, &extract_value(&1, &2))
-    |> handle_result()
-  end
-
-  defp extract_value(key, map) do
-    case Map.get(map, key) do
-      %Ecto.Association.NotLoaded{} -> %{}
-      nil -> %{}
-      val -> val
+    try do
+      case Kernel.get_in(struct, keys) do
+        %Ecto.Association.NotLoaded{} -> nil
+        result -> result
+      end
+    rescue
+      e in UndefinedFunctionError ->
+        case e.module do
+          Ecto.Association.NotLoaded -> nil
+          _otherwise -> raise e
+        end
     end
   end
-
-  defp handle_result(map) when is_map(map) do
-    case map_size(map) do
-      0 -> nil
-      _ -> map
-    end
-  end
-
-  defp handle_result(value), do: value
 end
