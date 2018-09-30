@@ -4,7 +4,7 @@ This tiny Elixir drop let's you reach in and unpack any value from a nested map.
 
 # Dependencies
 
-This library doesn't have any dependencies. However, to avoid depending on Ecto while still catching %Ecto.Assocation.NotLoaded{} values, I have stubbed the module. Be sure to place `:ecto` dependency in your deps function where it won't get overwritten :)
+This library doesn't have many dependencies. However, to avoid depending on Ecto while still catching `%Ecto.Assocation.NotLoaded{}` values, I have stubbed the module. Be sure to place your `:ecto` dependency in your mix.exs file's `deps` function where it won't get overwritten :)
 
 ## Installation
 
