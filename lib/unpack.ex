@@ -11,29 +11,16 @@ defmodule Unpack do
 
   ## Examples
       iex> struct = %{player: %{game: %{id: "game-id"}}}
-      iex> Unpack.get_in(struct, [:player, :game, :id])
+      iex> Unpack.get(struct, [:player, :game, :id])
       "game-id"
 
       iex> struct = %{player: %Ecto.Association.NotLoaded{}}
-      iex> Unpack.get_in(struct, [:player, :game, :id])
+      iex> Unpack.get(struct, [:player, :game, :id])
       nil
-
-  This utilizes the `Kernel.get_in/2` function, but avoids throwing hard errors.
-  Such as `%Ecto.Association.NotLoaded{}` or undefined function errors.
   """
-
-  def get_in(struct, keys) do
-    try do
-      case Kernel.get_in(struct, keys) do
-        %Ecto.Association.NotLoaded{} -> nil
-        result -> result
-      end
-    rescue
-      e in UndefinedFunctionError ->
-        case e.module do
-          Ecto.Association.NotLoaded -> nil
-          _otherwise -> raise e
-        end
-    end
-  end
+  def get(%Ecto.Association.NotLoaded{}, _), do: nil
+  def get(data, []), do: data
+  def get(data, [key | tail]) when is_map(data), do:
+    get(Map.get(data, key), tail)
+  def get(_data, _keys), do: nil
 end
