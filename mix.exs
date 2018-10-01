@@ -8,23 +8,23 @@ defmodule Unpack.MixProject do
       elixir: "~> 1.7",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
+      package: package(),
 
       # Docs
       name: "Unpack",
       description: "Reach in and unpack any value from a nested map.",
       source_url: "https://github.com/mrdougwright/unpack",
       docs: [
-        main: "unpack",
+        main: "Unpack",
         extras: ["README.md"]
-      ],
-      package: package(),
+      ]
     ]
   end
 
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      extra_applications: [:logger]
+      applications: [:logger]
     ]
   end
 
@@ -41,11 +41,7 @@ defmodule Unpack.MixProject do
       licenses: ["MIT"],
       links: %{"GitHub" => "https://github.com/mrdougwright/unpack"},
       maintainers: ["Doug Wright", "et al"],
-      files: [
-        "lib/unpack.ex",
-        "mix.exs",
-        "README.md"
-      ]
+      files: ["lib", "mix.exs", "README*"]
     ]
   end
 end
