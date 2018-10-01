@@ -5,7 +5,7 @@ defmodule Unpack.MixProject do
     [
       app: :unpack,
       version: "0.1.1",
-      elixir: "~> 1.7",
+      elixir: "~> 1.6",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       package: package(),
@@ -31,7 +31,7 @@ defmodule Unpack.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:ex_doc, "~> 0.19", only: :dev, runtime: false},
+      {:ex_doc, "~> 0.18.0", only: :dev, runtime: false},
       {:ecto, "~> 2.0", only: :dev}
     ]
   end

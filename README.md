@@ -12,6 +12,7 @@ struct = %{player: %Ecto.Association.NotLoaded{}}
 Unpack.get(struct, [:player, :game, :id])
 => nil
 ```
+Docs can be found at [https://hexdocs.pm/unpack](https://hexdocs.pm/unpack).
 
 # Dependencies
 This Elixir drop uses `Ecto` as a dev dependency. If you're not using Ecto you may have issues with this little library. Let me know or submit a PR!
@@ -28,4 +29,5 @@ def deps do
 end
 ```
 
-Once published, the docs can be found at [https://hexdocs.pm/unpack](https://hexdocs.pm/unpack).
+## Testing
+To test this package, run `MIX_ENV=dev mix test`. To submit a PR, please fork this repo first.
