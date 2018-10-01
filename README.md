@@ -23,7 +23,7 @@ Availabe as [Hex package](https://hex.pm/packages/unpack), the package can be in
 ```elixir
 def deps do
   [
-    {:unpack, "~> 0.1.0"}
+    {:unpack, "~> 0.1.1"}
   ]
 end
 ```
