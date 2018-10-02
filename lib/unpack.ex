@@ -3,15 +3,15 @@ defmodule Unpack do
   Unpack lets you "unpack" values from a nested map safely.
   """
   @doc """
-  Traverses any nested map or `struct`, in order of `keys` list, to return a
-  value. Returns nil for bad keys or empty maps.
+  Traverses any nested `map` or `struct` (data), in order of keys list (arg2),
+  to return a value. Returns `nil` for bad keys, unloaded associations or empty maps.
 
   ## Examples
       iex> struct = %{player: %{game: %{id: "game-id"}}}
       iex> Unpack.get(struct, [:player, :game, :id])
       "game-id"
 
-      iex> struct = %{player: %{}}
+      iex> struct = %{player: %Ecto.Association.NotLoaded{}}
       iex> Unpack.get(struct, [:player, :game, :id])
       nil
   """

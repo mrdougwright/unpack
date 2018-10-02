@@ -8,7 +8,7 @@ struct = %{player: %{game: %{id: "game-id"}}}
 Unpack.get(struct, [:player, :game, :id])
 => "game-id"
 
-struct = %{player: %{}}
+struct = %{player: %Ecto.Association.NotLoaded{}}
 Unpack.get(struct, [:player, :game, :id])
 => nil
 ```
@@ -16,12 +16,12 @@ Docs can be found at [https://hexdocs.pm/unpack](https://hexdocs.pm/unpack).
 
 ## Installation
 
-Availabe as [Hex package](https://hex.pm/packages/unpack), the package can be installed by adding `unpack` to your list of dependencies in `mix.exs`:
+Available as [Hex package](https://hex.pm/packages/unpack), the package can be installed by adding `unpack` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
   [
-    {:unpack, "~> 0.1.2"}
+    {:unpack, "~> 0.1.3"}
   ]
 end
 ```
