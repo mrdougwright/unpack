@@ -15,8 +15,11 @@ defmodule Unpack do
       iex> Unpack.get(struct, [:player, :game, :id])
       nil
   """
-  def get(data, [key | tail]) when is_map(data), do:
-    get(Map.get(data, key), tail)
+  if Code.ensure_loaded?(Ecto) do
+    def get(%Ecto.Association.NotLoaded{}, _), do: nil
+  end
+
+  def get(data, [key | tail]) when is_map(data), do: get(Map.get(data, key), tail)
 
   def get(data, []) when is_map(data) do
     case map_size(data) do
