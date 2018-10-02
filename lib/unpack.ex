@@ -15,6 +15,7 @@ defmodule Unpack do
       iex> Unpack.get(struct, [:player, :game, :id])
       nil
   """
+  @spec get(map(), [any()]) :: any() | nil
   def get(data, [key | tail]) when is_map(data), do:
     get(Map.get(data, key), tail)
 
