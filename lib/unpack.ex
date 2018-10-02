@@ -15,6 +15,10 @@ defmodule Unpack do
       iex> Unpack.get(struct, [:player, :game, :id])
       nil
   """
+  if Code.ensure_loaded?(Ecto) do
+    def get(%Ecto.Association.NotLoaded{}, _), do: nil
+  end
+
   @spec get(map(), [any()]) :: any() | nil
   def get(data, [key | tail]) when is_map(data), do:
     get(Map.get(data, key), tail)
