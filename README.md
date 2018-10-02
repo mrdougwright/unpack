@@ -27,4 +27,4 @@ end
 ```
 
 ## Testing
-To test this package, run `MIX_ENV=dev mix test`. To submit a PR, please fork this repo first.
+To test this package, run `mix test`. To submit a PR, please fork this repo first.
