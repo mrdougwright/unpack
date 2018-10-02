@@ -8,14 +8,11 @@ struct = %{player: %{game: %{id: "game-id"}}}
 Unpack.get(struct, [:player, :game, :id])
 => "game-id"
 
-struct = %{player: %Ecto.Association.NotLoaded{}}
+struct = %{player: %{}}
 Unpack.get(struct, [:player, :game, :id])
 => nil
 ```
 Docs can be found at [https://hexdocs.pm/unpack](https://hexdocs.pm/unpack).
-
-# Dependencies
-This Elixir drop uses `Ecto` as a dev dependency. If you're not using Ecto you may have issues with this little library. Let me know or submit a PR!
 
 ## Installation
 

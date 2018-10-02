@@ -12,7 +12,7 @@ defmodule UnpackTest do
 
   setup do
     p1 = %{game: %{}}
-    p2 = %{game: %{developer: %Ecto.Association.NotLoaded{}}}
+    p2 = %{game: %{developer: %{}}}
     p3 = %{game: %{developer: %{id: "dev-id"}}}
 
     %{player1: p1, player2: p2, player3: p3}
