@@ -54,4 +54,16 @@ defmodule UnpackTest do
       end
     end
   end
+
+  describe "unpack/3" do
+    test "returns a default value of nil if 3rd param not passed" do
+      struct = %{game: %Game{developer: %Developer{}}}
+      assert Unpack.get(struct, [:game, :developer, :age]) == nil
+    end
+
+    test "returns default value if key value not found" do
+      struct = %{game: %Game{developer: %Developer{}}}
+      assert Unpack.get(struct, [:game, :developer, :age], "wut!?") == "wut!?"
+    end
+  end
 end
