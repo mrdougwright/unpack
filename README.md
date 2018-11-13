@@ -1,6 +1,6 @@
 # Unpack
 
-This tiny Elixir drop let's you reach in and unpack any value from a nested map. Returns nil for bad keys, unloaded associations, or empty maps. Can also take a 3rd param to return a default value when key not found.
+This tiny Elixir drop lets you reach in and unpack any value from a nested map. Returns nil for bad keys, unloaded associations, or empty maps. Can also take a 3rd param to return a default value when key not found.
 
 # Examples
 ```elixir
