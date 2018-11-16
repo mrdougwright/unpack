@@ -1,3 +1,7 @@
+defmodule Ecto.Association.NotLoaded do
+  defstruct []
+end
+
 defmodule UnpackTest do
   use ExUnit.Case
   doctest Unpack
@@ -47,11 +51,9 @@ defmodule UnpackTest do
       assert Unpack.get(struct, [:game, :developer, :name]) == "Nascar"
     end
 
-    if Code.ensure_loaded?(Ecto) do
-      test "returns nil if value is an unloaded Ecto relation" do
-        struct = %{game: %Game{developer: %Ecto.Association.NotLoaded{}}}
-        assert Unpack.get(struct, [:game, :developer]) == nil
-      end
+    test "returns nil if value is an unloaded Ecto relation" do
+      struct = %{game: %Game{developer: %Ecto.Association.NotLoaded{}}}
+      assert Unpack.get(struct, [:game, :developer]) == nil
     end
   end
 
