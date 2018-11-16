@@ -12,7 +12,7 @@ defmodule Unpack do
       iex> Unpack.get(map, [:player, :game, :id])
       "game-id"
 
-      iex> struct = %{player: %Ecto.Association.NotLoaded{}}
+      iex> struct = %{player: %{__struct__: Ecto.Association.NotLoaded}}
       iex> Unpack.get(struct, [:player, :game, :id])
       nil
 
@@ -22,9 +22,7 @@ defmodule Unpack do
   """
   def get(data, list, default \\ nil)
 
-  if Code.ensure_loaded?(Ecto) do
-    def get(%Ecto.Association.NotLoaded{}, _, default), do: default
-  end
+  def get(%{__struct__: Ecto.Association.NotLoaded}, _, default), do: default
 
   @spec get(map(), [any()]) :: any() | nil
   def get(data, [key | tail], default) when is_map(data), do:
