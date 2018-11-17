@@ -22,7 +22,7 @@ defmodule UnpackTest do
     %{player1: p1, player2: p2, player3: p3}
   end
 
-  describe "unpack/2" do
+  describe "get/2" do
     test "returns nil if value not found from bad keys", %{player1: player} do
       assert Unpack.get(player, [:bogus_key]) == nil
       assert Unpack.get(player, [:game, :some_key]) == nil
@@ -55,14 +55,14 @@ defmodule UnpackTest do
       struct = %{game: %Game{developer: %Ecto.Association.NotLoaded{}}}
       assert Unpack.get(struct, [:game, :developer]) == nil
     end
-  end
 
-  describe "unpack/3" do
     test "returns a default value of nil if 3rd param not passed" do
       struct = %{game: %Game{developer: %Developer{}}}
       assert Unpack.get(struct, [:game, :developer, :age]) == nil
     end
+  end
 
+  describe "get/3" do
     test "returns default value if key value not found" do
       struct = %{game: %Game{developer: %Developer{}}}
       assert Unpack.get(struct, [:game, :developer, :age], "wut!?") == "wut!?"

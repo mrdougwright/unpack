@@ -1,32 +1,42 @@
 defmodule Unpack do
   @moduledoc """
-  Unpack lets you "unpack" values from a nested map safely.
+  Unpack lets you safely "unpack" any values from a nested map, struct or database object.
   """
+
   @doc """
-  Traverses any nested `map` or `struct` (data), in order of keys list (arg2),
-  to return a value. Returns `nil` for bad keys, unloaded associations or empty maps.
-  Can also take a 3rd param to change default return value.
+  Traverses nested `data` map or struct in order of keys `list` to return a value.
+  Returns nil for missing keys, unloaded associations or empty maps.
 
   ## Examples
-      iex> map = %{player: %{game: %{id: "game-id"}}}
+      iex> map = %{player: %{game: %{id: "game_id"}}}
       iex> Unpack.get(map, [:player, :game, :id])
-      "game-id"
+      "game_id"
 
-      iex> struct = %{player: %{__struct__: Ecto.Association.NotLoaded}}
+      iex> struct = %{player: %Ecto.Association.NotLoaded{}}
       iex> Unpack.get(struct, [:player, :game, :id])
       nil
-
-      iex> map = %{player: %{}}
-      iex> Unpack.get(map, [:player, :wrong_key], "eh!")
-      "eh!"
   """
-  def get(data, list, default \\ nil)
-
-  def get(%{__struct__: Ecto.Association.NotLoaded}, _, default), do: default
-
   @spec get(map(), [any()]) :: any() | nil
-  def get(data, [key | tail], default) when is_map(data), do:
+  def get(data, list), do: get(data, list, nil)
+
+
+  @doc """
+  Traverses nested `data` map or struct in order of keys `list` to return a value.
+  Returns given `default` parameter for missing keys, unloaded associations or empty maps.
+
+  ## Examples
+      iex> map = %{player: %{name: "George"}}
+      iex> Unpack.get(map, [:player, :email], "🙈")
+      "🙈"
+  """
+  @spec get(map(), [any()], any()) :: any()
+  def get(data, list, default)
+
+  def get(%{__struct__: Ecto.Association.NotLoaded}, _keys, default), do: default
+
+  def get(data, [key | tail], default) when is_map(data) do
     get(Map.get(data, key), tail, default)
+  end
 
   def get(data, [], default) when is_map(data) do
     case map_size(data) do
