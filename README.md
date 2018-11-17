@@ -1,6 +1,6 @@
 # Unpack
 
-This tiny Elixir drop lets you reach in and unpack any value from a nested map. Returns nil for bad keys, unloaded associations, or empty maps. Can also take a 3rd param to return a default value when key not found.
+This tiny Elixir drop lets you reach in and unpack any value from a nested map. Returns nil for bad or missing keys, unloaded associations, or empty maps. Unpack can also take a 3rd parameter to return a default value when key not found.
 
 # Examples
 ```elixir
@@ -25,10 +25,11 @@ Available as [Hex package](https://hex.pm/packages/unpack), the package can be i
 ```elixir
 def deps do
   [
-    {:unpack, "~> 0.1.4"}
+    {:unpack, "~> 0.1.5"}
   ]
 end
 ```
 
-## Testing
-To test this package, run `mix test`. To submit a PR, please fork this repo first.
+## Contributing
+Ideas or improvements? Please submit a Github issue.
+To submit a PR, please fork this repo first.
