@@ -19,7 +19,6 @@ defmodule Unpack do
   @spec get(map(), [any()]) :: any() | nil
   def get(data, list), do: get(data, list, nil)
 
-
   @doc """
   Traverses nested `data` map or struct in order of keys `list` to return a value.
   Returns given `default` parameter for missing keys, unloaded associations or empty maps.
@@ -45,6 +44,7 @@ defmodule Unpack do
     end
   end
 
+  def get(false, [], _default), do: false
   def get(data, [], default), do: data || default
   def get(_data, _keys, default), do: default
 end

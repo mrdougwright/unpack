@@ -15,7 +15,7 @@ defmodule UnpackTest do
   end
 
   setup do
-    p1 = %{game: %{}}
+    p1 = %{game: %{disabled: false}}
     p2 = %{game: %{developer: %{}}}
     p3 = %{game: %{developer: %{id: "dev-id"}}}
 
@@ -38,6 +38,10 @@ defmodule UnpackTest do
     test "returns value if key found in nested attrs", %{player3: player} do
       assert Unpack.get(player, [:game, :developer]) == %{id: "dev-id"}
       assert Unpack.get(player, [:game, :developer, :id]) == "dev-id"
+    end
+
+    test "returns the value false when it's a value and not nil", %{player1: player} do
+      assert Unpack.get(player, [:game, :disabled]) == false
     end
 
     test "returns nil if value not found in nested structs" do

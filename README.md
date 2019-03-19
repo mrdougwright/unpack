@@ -25,7 +25,7 @@ Available as [Hex package](https://hex.pm/packages/unpack), the package can be i
 ```elixir
 def deps do
   [
-    {:unpack, "~> 0.1.5"}
+    {:unpack, "~> 0.1.6"}
   ]
 end
 ```
