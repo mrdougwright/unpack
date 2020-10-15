@@ -1,6 +1,8 @@
 defmodule Unpack do
   @moduledoc """
-  Unpack lets you safely "unpack" any values from a nested map, struct or database object.
+  Unpack has two functions.
+  `get` lets you safely "unpack" any values from a nested map, struct or database object.
+  `from_struct` will convert a struct (and nested structs) to a map.
   """
 
   @doc """
@@ -47,4 +49,40 @@ defmodule Unpack do
   def get(false, [], _default), do: false
   def get(data, [], default), do: data || default
   def get(_data, _keys, default), do: default
+
+  @doc """
+  Deep convert a struct to a map, including nested struct values or nested lists.
+
+  ## Examples
+      defmodule Game do
+        defstruct [:name]
+      end
+
+      defmodule Developer do
+        defstruct [:games]
+      end
+
+      struct = %Developer{games: [%Game{name: "RDR2"}]}
+
+      Unpack.from_struct(struct)
+      => %{games: [%{name: "RDR2"}]}
+  """
+  def from_struct(struct) when is_map(struct) do
+    case Map.has_key?(struct, :__struct__) do
+      true ->
+        struct
+        |> Map.from_struct()
+        |> Enum.into(%{}, fn {k, v} -> {k, from_struct(v)} end)
+
+      false ->
+        struct
+        |> Enum.into(%{}, fn {k, v} -> {k, from_struct(v)} end)
+    end
+  end
+
+  def from_struct(list) when is_list(list) do
+    Enum.map(list, &from_struct/1)
+  end
+
+  def from_struct(value), do: value
 end
