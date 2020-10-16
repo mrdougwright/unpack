@@ -4,7 +4,7 @@ defmodule Unpack.MixProject do
   def project do
     [
       app: :unpack,
-      version: "0.1.6",
+      version: "0.1.7",
       elixir: "~> 1.6",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
@@ -12,7 +12,7 @@ defmodule Unpack.MixProject do
 
       # Docs
       name: "Unpack",
-      description: "Traverse a nested map to get any value without throwing errors.",
+      description: "Safely traverse maps and convert stucts without throwing errors.",
       source_url: "https://github.com/mrdougwright/unpack",
       docs: [
         main: "Unpack",
